@@ -60,7 +60,7 @@ public class AndroidLogSource extends LogSource {
         return null;
     }
 
-    public AndroidLogSource(String device) throws DeviceNotConnected {
+    public AndroidLogSource(String device, String logcatArgs) throws DeviceNotConnected {
         super();
         mRollLines = SystemConfigs.instance().getLogRollingLines();
         setStatus(stConnecting);
@@ -74,6 +74,7 @@ public class AndroidLogSource extends LogSource {
             }
             adbcmd.add("logcat");
             adbcmd.add("-vthreadtime");
+            adbcmd.add(logcatArgs);
 
             ProcessBuilder pb = new ProcessBuilder();
             pb.redirectErrorStream(true);

@@ -44,6 +44,7 @@ public final class Resources {
     public static Image config_32 = null;
     public static Image help_32 = null;
     public static Image android_32 = null;
+    public static Image android_radio_32 = null;
     public static Image androidpause_32 = null;
     public static Image disconnectedand_32 = null;
     public static Image android_log_32 = null;
@@ -98,6 +99,7 @@ public final class Resources {
         help_32 = loadIcon(ctx, "help_32");
 
         android_32 = loadIcon(ctx, "android_32");
+        android_radio_32 = loadIcon(ctx, "android_radio_32");
         disconnectedand_32 = loadIcon(ctx, "disconnectedand_32");
         androidpause_32 = loadIcon(ctx, "androidpause_32");
 

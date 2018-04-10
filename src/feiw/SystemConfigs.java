@@ -245,7 +245,7 @@ public final class SystemConfigs {
         return null;
     }
 
-    String mAdbPath = "/Developer/SDKs/android-sdk/platform-tools";
+    String mAdbPath = "/usr/bin";
 
     public String getAdbPath() {
         if (!mAdbPath.endsWith("/")) {

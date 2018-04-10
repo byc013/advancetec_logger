@@ -24,10 +24,13 @@ import feiw.LogSource.StatusListener;
 
 public class AndroidTabFrame extends SlogTabFrame implements StatusListener {
 
-    public AndroidTabFrame(CTabFolder parent, int style, String device) throws DeviceNotConnected {
-        super(parent, "adb logcat " + device, SWT.FLAT | SWT.CLOSE | SWT.ICON, new AndroidLogSource(device), null,
+    public AndroidTabFrame(CTabFolder parent, int style, String device, String logcatArgs) throws DeviceNotConnected {
+        super(parent, "adb logcat " + logcatArgs + device, SWT.FLAT | SWT.CLOSE | SWT.ICON, new AndroidLogSource(device, logcatArgs), null,
                 new LogParser.AndroidThreadtimeLogParser(), null);
-        setImage(Resources.android_32);
+        if(logcatArgs.equals(""))
+            setImage(Resources.android_32);
+        else
+            setImage(Resources.android_radio_32);
         mLogSrc.addStatusListener(this);
     }
 

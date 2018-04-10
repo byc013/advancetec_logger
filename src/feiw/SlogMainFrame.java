@@ -553,7 +553,51 @@ public final class SlogMainFrame {
                     selectedDevice = d.getSelection();
                 }
                 try {
-                    SlogTabFrame ltab = new AndroidTabFrame(mTabFolder, SWT.FLAT | SWT.CLOSE | SWT.ICON, devs[selectedDevice]);
+                    SlogTabFrame ltab = new AndroidTabFrame(mTabFolder, SWT.FLAT | SWT.CLOSE | SWT.ICON, devs[selectedDevice], "");
+                    mTabFolder.setSelection(ltab);
+                    updateToolBars(ltab);
+                } catch (DeviceNotConnected e1) {
+                }
+            }
+        });
+
+        getToolItem(ToolBarDes.TN_CONNECTANDROIDRADIO).addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+
+                if (!AndroidLogSource.checkAdb(SystemConfigs.instance().getAdbPath() + "/adb")) {
+                    String adbPath = null;
+                    do {
+
+                        DirectoryDialog dialog = new DirectoryDialog(getShell());
+                        dialog.setText("ADB not found, Please specify directory that contains ADB");
+                        adbPath = dialog.open();
+                    } while (adbPath != null && !AndroidLogSource.checkAdb(adbPath + "/adb"));
+                    if (adbPath == null) {
+                        return;
+                    }
+                    SystemConfigs.instance().setAdbPath(adbPath);
+                }
+
+                final String [] devs = AndroidLogSource.enumDevices();
+                if (devs == null) {
+                    MessageBox m = new MessageBox(getShell(), SWT.OK | SWT.ICON_ERROR);
+                    m.setText("Error");
+                    m.setMessage("No Android device connected");
+                    m.open();
+                    return;
+                }
+                int selectedDevice = 0;
+                if (devs.length > 1) {
+                    //multiple device, choice
+                    AndroidDeviceChoiceDlg d = new AndroidDeviceChoiceDlg(getShell(), devs, 0);
+                    if (d.open() != SWT.OK) {
+                        return;
+                    }
+                    selectedDevice = d.getSelection();
+                }
+                try {
+                    SlogTabFrame ltab = new AndroidTabFrame(mTabFolder, SWT.FLAT | SWT.CLOSE | SWT.ICON, devs[selectedDevice], "-b radio ");
                     mTabFolder.setSelection(ltab);
                     updateToolBars(ltab);
                 } catch (DeviceNotConnected e1) {
@@ -578,6 +622,8 @@ public final class SlogMainFrame {
         } else if (tn.equals(ToolBarDes.TN_HELP)) {
             tit.setEnabled(true);
         } else if (tn.equals(ToolBarDes.TN_CONNECTANDROID)) {
+            tit.setEnabled(true);
+        } else if (tn.equals(ToolBarDes.TN_CONNECTANDROIDRADIO)) {
             tit.setEnabled(true);
         } else if (tn.equals(ToolBarDes.TN_OPENFIFO)) {
             tit.setEnabled(true);

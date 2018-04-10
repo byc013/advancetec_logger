@@ -53,6 +53,7 @@ public final class ToolBarDes {
 
     public static final String TN_CONNECT = "Connect";
     public static final String TN_CONNECTANDROID = "ConnectAndroid";
+    public static final String TN_CONNECTANDROIDRADIO = "ConnectAndroidRadio";
     public static final String TN_OPEN = "Open";
     public static final String TN_OPENFIFO = "OpenFifo";
     public static final String TN_FILTER = "Filter";
@@ -83,8 +84,10 @@ public final class ToolBarDes {
                     new ToolItemDes[] {
                             new ToolItemDes(TN_CONNECT, "Connect to QCONN device", Resources.connected_32,
                                     SWT.DROP_DOWN, new int[]{cmdkey | 'd'}),
-                            new ToolItemDes(TN_CONNECTANDROID, "Connect to Android device", Resources.android_32,
+                            new ToolItemDes(TN_CONNECTANDROID, "Open logcat tab", Resources.android_32,
                                     SWT.PUSH, new int[]{cmdkey | 'a'}),
+                            new ToolItemDes(TN_CONNECTANDROIDRADIO, "Open logcat radio tab", Resources.android_radio_32,
+                                    SWT.PUSH, new int[]{cmdkey | 'r'}),
                     // new ToolItemDes(null, null, null, SWT.SEPARATOR, 0),
                     new ToolItemDes(TN_OPEN, "Open Log file", Resources.openfile_32, SWT.DROP_DOWN, new int[]{cmdkey | 'o'}),
                     new ToolItemDes(TN_OPENFIFO, "Open Fifo to receive logs", Resources.fifo_32, SWT.PUSH,
